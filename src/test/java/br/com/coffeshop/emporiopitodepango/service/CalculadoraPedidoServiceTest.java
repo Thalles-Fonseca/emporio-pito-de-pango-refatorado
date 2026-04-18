@@ -14,7 +14,7 @@ public class CalculadoraPedidoServiceTest {
 
         assertEquals(30.0, resultado);
     }
-
+//Teste Atualizado
     @Test
     public void deveLancarExcecaoQuandoValorUnitarioForInvalido() {
         CalculadoraPedidoService calculadora = new CalculadoraPedidoService();
