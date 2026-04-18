@@ -1,5 +1,5 @@
-
 package br.com.coffeshop.emporiopitodepango.service;
+
 import br.com.coffeshop.emporiopitodepango.model.Pedido;
 import br.com.coffeshop.emporiopitodepango.repository.PedidoRepository;
 import java.util.List;
@@ -7,20 +7,29 @@ import java.util.List;
 public class PedidoService {
 
     private final PedidoRepository repository;
+    private final CalculadoraPedidoService calculadoraPedidoService;
 
     public PedidoService() {
         this.repository = new PedidoRepository();
+        this.calculadoraPedidoService = new CalculadoraPedidoService();
+        
     }
 
     public void salvar(Pedido pedido) {
         validar(pedido);
-        pedido.setTotal(calcularTotal(pedido));
+        pedido.setTotal(calculadoraPedidoService.calcularTotal(
+                pedido.getValorUnitario(),
+                pedido.getQuantidade()
+        ));
         repository.salvar(pedido);
     }
 
     public void atualizar(Pedido pedido) {
         validar(pedido);
-        pedido.setTotal(calcularTotal(pedido));
+        pedido.setTotal(calculadoraPedidoService.calcularTotal(
+                pedido.getValorUnitario(),
+                pedido.getQuantidade()
+        ));
         repository.atualizar(pedido);
     }
 
