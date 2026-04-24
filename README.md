@@ -22,26 +22,51 @@ A proposta principal foi separar as responsabilidades das classes, removendo o a
 src/
 └── main/
     ├── java/
-    │   ├── modelo/
-    │   │   ├── Produto.java
-    │   │   ├── Cliente.java
-    │   │   └── Pedido.java
-    │   │
-    │   ├── repository/
-    │   │   ├── ConexaoBD.java
-    │   │   ├── ProdutoRepository.java
-    │   │   ├── ClienteRepository.java
-    │   │   └── PedidoRepository.java
-    │   │
-    │   ├── service/
-    │   │   ├── ProdutoService.java
-    │   │   ├── ClienteService.java
-    │   │   └── PedidoService.java
-    │   │
-    │   └── br/com/coffeshop/emporiopitodepango/main/
-    │       └── EmporioPitoDePango.java
+    │   └── br/com/coffeshop/emporiopitodepango/
+    │
+    │       ├── EmporioPitoDePangoApplication.java
+    │
+    │       ├── controller/
+    │       │   ├── HomeController.java
+    │       │   └── ProdutoController.java
+    │
+    │       ├── model/
+    │       │   ├── Produto.java
+    │       │   ├── Cliente.java
+    │       │   └── Pedido.java
+    │
+    │       ├── repository/
+    │       │   ├── ConexaoBD.java
+    │       │   ├── ProdutoRepository.java
+    │       │   ├── ClienteRepository.java
+    │       │   └── PedidoRepository.java
+    │
+    │       ├── service/
+    │       │   ├── ProdutoService.java
+    │       │   ├── ClienteService.java
+    │       │   └── PedidoService.java
     │
     └── resources/
+        ├── templates/
+        │   ├── index.html
+        │   ├── produtos.html
+        │   ├── produto.html
+        │   ├── produto-form.html
+        │   ├── carrinho.html
+        │   ├── contato.html
+        │   └── sobre.html
+        │
+        ├── static/
+        │   ├── css/
+        │   │   └── style.css
+        │   │
+        │   ├── js/
+        │   │   ├── produtos.js
+        │   │   └── validacoes.js
+        │   │
+        │   └── img/
+        │       └── LogoPitodePango.png
+        │
         └── database.properties
 
 Tecnologias utilizadas:
