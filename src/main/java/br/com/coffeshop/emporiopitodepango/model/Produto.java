@@ -91,4 +91,14 @@ public class Produto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+    
+    private boolean ativo;
+
+public boolean isAtivo() {
+    return ativo;
+}
+
+public void setAtivo(boolean ativo) {
+    this.ativo = ativo;
+}
 }
