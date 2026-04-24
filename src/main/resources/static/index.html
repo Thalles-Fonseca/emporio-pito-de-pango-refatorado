@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Empório Pito de Pango</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <header class="topo">
+            <div class="logo-area">
+                <img src="img/LogoPitodePango.png" alt="Logo Empório Pito de Pango">
+                <strong>Empório Pito de Pango</strong>
+            </div>
+
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="produtos.html">Produtos</a>
+                <a href="produto.html">Produto</a>
+                <a href="carrinho.html">Carrinho</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+
+            <div class="carrinho">🛒 <span id="contadorCarrinho">0</span></div>
+        </header>
+
+        <section class="banner">
+            <div class="banner-texto">
+                <p>Seu café, sua vibe</p>
+                <h1>Seu ritual, do seu jeito.</h1>
+                <span>Produtos selecionados para elevar seus momentos.</span>
+                <a href="produtos.html" class="btn">Comprar agora</a>
+            </div>
+            <img src="img/LogoPitodePango.png" alt="Logo destaque">
+        </section>
+
+        <section class="secao">
+            <h2>Categorias</h2>
+
+            <div class="categorias-grid">
+                <div>Grãos sem terpenos</div>
+                <div>Grãos com terpenos</div>
+                <div>Salgados</div>
+                <div>Chocolate em barra</div>
+                <div>Filtros e passadores</div>
+                <div>Isqueiros e maçaricos</div>
+                <div>Sedas</div>
+                <div>Blunts</div>
+                <div>Piteiras</div>
+                <div>Dichavador</div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>Produtos em destaque</h2>
+
+            <div class="produtos-grid">
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Café Especial</h3>
+                    <p>Grãos sem terpenos</p>
+                    <strong>R$ 39,90</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Café com Terpenos</h3>
+                    <p>Grãos com terpenos</p>
+                    <strong>R$ 49,90</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Chocolate Artesanal</h3>
+                    <p>Chocolate em barra</p>
+                    <strong>R$ 19,90</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <img src="img/LogoPitodePango.png" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+        <script src="js/produtos.js"></script>
+    </body>
+</html>

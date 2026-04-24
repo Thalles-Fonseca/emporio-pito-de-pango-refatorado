@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Produto - Empório Pito de Pango</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <header class="topo">
+            <div class="logo-area">
+                <img src="img/LogoPitodePango.png" alt="Logo">
+                <strong>Empório Pito de Pango</strong>
+            </div>
+
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="produtos.html">Produtos</a>
+                <a href="produto.html">Produto</a>
+                <a href="carrinho.html">Carrinho</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+
+            <a class="carrinho-link" href="carrinho.html">🛒 <span id="contadorCarrinho">0</span></a>
+        </header>
+
+        <main class="secao detalhe-produto">
+            <section class="produto-imagem">
+                <div class="img-produto-grande">Imagem do Produto</div>
+                <div class="miniaturas">
+                    <div>Img</div>
+                    <div>Img</div>
+                    <div>Img</div>
+                </div>
+            </section>
+
+            <section class="produto-info">
+                <span class="tag-verde">Novo</span>
+                <h1>Café Especial Premium</h1>
+                <p class="categoria-produto">Grãos de Café Especial sem terpenos</p>
+                <strong class="preco-produto">R$ 39,90</strong>
+
+                <p>
+                    Café selecionado com torra artesanal, aroma marcante e sabor equilibrado.
+                    Ideal para quem valoriza um ritual de preparo com personalidade.
+                </p>
+
+                <div class="beneficios-produto">
+                    <div>🌿 Qualidade premium</div>
+                    <div>☕ Torra artesanal</div>
+                    <div>🔥 Aroma intenso</div>
+                </div>
+
+                <div class="quantidade-box">
+                    <label>Quantidade:</label>
+                    <button onclick="alterarQuantidade(-1)">-</button>
+                    <span id="quantidadeProduto">1</span>
+                    <button onclick="alterarQuantidade(1)">+</button>
+                </div>
+
+                <button class="btn" onclick="adicionarCarrinho()">Adicionar ao carrinho</button>
+                <a href="carrinho.html" class="btn btn-secundario">Ir para o carrinho</a>
+            </section>
+        </main>
+
+        <section class="secao">
+            <h2>Produtos relacionados</h2>
+
+            <div class="produtos-grid">
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Café com Terpenos</h3>
+                    <p>Grãos com terpenos</p>
+                    <strong>R$ 49,90</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Filtro de Café</h3>
+                    <p>Filtros e passadores</p>
+                    <strong>R$ 15,00</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+
+                <div class="card-produto">
+                    <div class="img-placeholder">Imagem</div>
+                    <h3>Chocolate em Barra</h3>
+                    <p>Chocolate</p>
+                    <strong>R$ 19,90</strong>
+                    <button onclick="adicionarCarrinho()">Adicionar</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <img src="img/LogoPitodePango.png" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+        <script src="js/produtos.js"></script>
+    </body>
+</html>

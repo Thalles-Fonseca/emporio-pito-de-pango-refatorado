@@ -1,5 +1,3 @@
-
-
 package br.com.coffeshop.emporiopitodepango.main;
 
 import br.com.coffeshop.emporiopitodepango.model.Cliente;
