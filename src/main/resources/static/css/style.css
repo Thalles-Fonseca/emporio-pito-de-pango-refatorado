@@ -1,3 +1,4 @@
+
 :root {
     --marrom: #5b341f;
     --marrom-escuro: #2b160d;
@@ -524,4 +525,21 @@ footer img {
         margin: 12px 0 0 0;
         text-align: center;
     }
+}
+.acoes-pagina {
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+.acoes-card {
+    padding: 0 16px;
+}
+
+.mensagem-erro {
+    background: #f8d7da;
+    color: #842029;
+    border-left: 5px solid #9b2f24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }

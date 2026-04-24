@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Carrinho - Empório Pito de Pango</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
 
         <header class="topo">
             <div class="logo-area">
-                <img src="img/LogoPitodePango.png" alt="Logo">
+                <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
                 <strong>Empório Pito de Pango</strong>
             </div>
 
             <nav>
-                <a href="index.html">Início</a>
-                <a href="produtos.html">Produtos</a>
-                <a href="produto.html">Produto</a>
-                <a href="carrinho.html">Carrinho</a>
-                <a href="sobre.html">Sobre</a>
-                <a href="contato.html">Contato</a>
+                <a th:href="@{/}">Início</a>
+                <a th:href="@{/produtos}">Produtos</a>
+                <a th:href="@{/produto}">Produto</a>
+                <a th:href="@{/carrinho}">Carrinho</a>
+                <a th:href="@{/sobre}">Sobre</a>
+                <a th:href="@{/contato}">Contato</a>
             </nav>
 
-            <a class="carrinho-link" href="carrinho.html">🛒 <span id="contadorCarrinho">0</span></a>
-            
+            <a class="carrinho-link" th:href="@{/carrinho}">
+                🛒 <span id="contadorCarrinho">0</span>
+            </a>
         </header>
 
         <main class="secao">
@@ -34,20 +35,23 @@
                 <section class="lista-carrinho">
                     <div class="item-carrinho">
                         <div class="img-carrinho">Img</div>
+
                         <div>
                             <h3>Café Especial Premium</h3>
                             <p>Grãos sem terpenos</p>
                             <strong>R$ 39,90</strong>
                         </div>
+
                         <div class="quantidade-box">
-                            <button onclick="alterarQuantidadeCarrinho(-1)">-</button>
+                            <button type="button" onclick="alterarQuantidadeCarrinho(-1)">-</button>
                             <span id="quantidadeCarrinho">1</span>
-                            <button onclick="alterarQuantidadeCarrinho(1)">+</button>
+                            <button type="button" onclick="alterarQuantidadeCarrinho(1)">+</button>
                         </div>
-                        <button class="btn-remover" onclick="limparCarrinho()">Remover</button>
+
+                        <button type="button" class="btn-remover" onclick="limparCarrinho()">Remover</button>
                     </div>
 
-                    <a href="produtos.html" class="btn btn-secundario">Continuar comprando</a>
+                    <a th:href="@{/produtos}" class="btn btn-secundario">Continuar comprando</a>
                 </section>
 
                 <aside class="resumo-carrinho">
@@ -56,17 +60,17 @@
                     <p>Entrega: <strong>Consultar</strong></p>
                     <hr>
                     <p>Total: <strong id="totalCarrinho">R$ 39,90</strong></p>
-                    <a href="contato.html" class="btn">Finalizar pedido</a>
+                    <a th:href="@{/contato}" class="btn">Finalizar pedido</a>
                 </aside>
             </div>
         </main>
 
         <footer>
-            <img src="img/LogoPitodePango.png" alt="Logo">
+            <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
             <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
             <p>© 2026 Todos os direitos reservados.</p>
         </footer>
 
-        <script src="js/produtos.js"></script>
+        <script th:src="@{/js/produtos.js}"></script>
     </body>
 </html>

@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class ConexaoBD {
 
-    private static final String ARQUIVO_CONFIG = "/database.properties";
+    private static final String ARQUIVO_CONFIG = "/application.properties";
     private static String url;
     private static String usuario;
     private static String senha;

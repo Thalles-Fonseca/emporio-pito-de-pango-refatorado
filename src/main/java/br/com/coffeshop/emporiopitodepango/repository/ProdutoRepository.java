@@ -6,8 +6,9 @@ import br.com.coffeshop.emporiopitodepango.model.Produto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class ProdutoRepository {
 
     public void salvar(Produto p) {

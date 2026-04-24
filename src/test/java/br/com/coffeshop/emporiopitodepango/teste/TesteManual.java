@@ -1,4 +1,4 @@
-package br.com.coffeshop.emporiopitodepango.main;
+package br.com.coffeshop.emporiopitodepango.teste;
 
 import br.com.coffeshop.emporiopitodepango.model.Cliente;
 import br.com.coffeshop.emporiopitodepango.model.Pedido;
@@ -8,7 +8,7 @@ import br.com.coffeshop.emporiopitodepango.service.PedidoService;
 import br.com.coffeshop.emporiopitodepango.service.ProdutoService;
 
 
-public class EmporioPitoDePango {
+public class TesteManual {
 
     public static void main(String[] args) {
         ProdutoService produtoService = new ProdutoService();
@@ -36,11 +36,11 @@ public class EmporioPitoDePango {
                 System.out.println("Cliente: " + c.getId() + " - " + c.getNome() + " - " + c.getCpf());
             }
 
-            Cliente clienteBanco = clienteService.buscar("12345678900").get(0);
+            Cliente clienteBanco = clienteService.buscar("12345678910").get(0);
 
             System.out.println("\n=== TESTE DE PEDIDO ===");
             Pedido pedido = new Pedido(1, clienteBanco.getId(), clienteBanco.getNome(),
-                    "2026-04-13", "Café Expresso", 7.50, 2);
+                    "2026-04-13", "CafÃ© Expresso", 7.50, 2);
             pedidoService.salvar(pedido);
             System.out.println("Pedido salvo com sucesso.");
 

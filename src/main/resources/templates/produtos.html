@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Produtos - Empório Pito de Pango</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+
+        <header class="topo">
+            <div class="logo-area">
+                <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+                <strong>Empório Pito de Pango</strong>
+            </div>
+
+            <nav>
+                <a th:href="@{/}">Início</a>
+                <a th:href="@{/produtos}">Produtos</a>
+                <a th:href="@{/produto}">Produto</a>
+                <a th:href="@{/carrinho}">Carrinho</a>
+                <a th:href="@{/sobre}">Sobre</a>
+                <a th:href="@{/contato}">Contato</a>
+            </nav>
+
+            <a class="carrinho-link" th:href="@{/carrinho}">
+                🛒 <span id="contadorCarrinho">0</span>
+            </a>
+        </header>
+
+        <main class="secao">
+            <h1>Catálogo de Produtos</h1>
+
+            <div class="acoes-pagina">
+                <a class="btn" th:href="@{/produtos/novo}">Novo Produto</a>
+            </div>
+
+            <div class="produtos-grid">
+                <div class="card-produto" th:each="produto : ${produtos}">
+                    <div class="img-placeholder">Imagem</div>
+
+                    <h3 th:text="${produto.nome}">Nome do Produto</h3>
+                    <p th:text="${produto.categoria}">Categoria</p>
+                    <p th:text="'Fornecedor: ' + ${produto.fornecedor}">Fornecedor</p>
+                    <p th:text="'Qtd: ' + ${produto.quantidade}">Qtd</p>
+                    <strong th:text="'R$ ' + ${produto.valor}">R$ 00,00</strong>
+
+                    <div class="acoes-card">
+                        <!-- DELETE CORRIGIDO -->
+                        <a class="btn"
+                           th:href="@{/produtos/excluir/{codigo}(codigo=${produto.codigo})}"
+                           onclick="return confirm('Deseja excluir este produto?')">
+                            Excluir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+        <script th:src="@{/js/produtos.js}"></script>
+    </body>
+</html>

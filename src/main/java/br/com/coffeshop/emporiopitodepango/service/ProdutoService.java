@@ -4,7 +4,9 @@ import br.com.coffeshop.emporiopitodepango.model.Produto;
 import br.com.coffeshop.emporiopitodepango.repository.ProdutoRepository;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProdutoService {
 
     private final ProdutoRepository repository;

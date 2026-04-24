@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastrar Produto - Empório Pito de Pango</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+
+        <header class="topo">
+            <div class="logo-area">
+                <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+                <strong>Empório Pito de Pango</strong>
+            </div>
+
+            <nav>
+                <a th:href="@{/}">Início</a>
+                <a th:href="@{/produtos}">Produtos</a>
+                <a th:href="@{/produto}">Produto</a>
+                <a th:href="@{/carrinho}">Carrinho</a>
+                <a th:href="@{/sobre}">Sobre</a>
+                <a th:href="@{/contato}">Contato</a>
+            </nav>
+
+            <a class="carrinho-link" th:href="@{/carrinho}">
+                🛒 <span id="contadorCarrinho">0</span>
+            </a>
+        </header>
+
+        <main class="secao contato-container">
+            <section>
+                <h1>Cadastrar Produto</h1>
+
+                <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+                <form th:action="@{/produtos/salvar}" th:object="${produto}" method="post">
+                    <label>Código</label>
+                    <input type="number" th:field="*{codigo}" required>
+
+                    <label>Nome</label>
+                    <input type="text" th:field="*{nome}" required>
+
+                    <label>Fornecedor</label>
+                    <input type="text" th:field="*{fornecedor}" required>
+
+                    <label>Quantidade</label>
+                    <input type="number" th:field="*{quantidade}" required>
+
+                    <label>Valor</label>
+                    <input type="number" step="0.01" th:field="*{valor}" required>
+
+                    <label>Data de cadastro</label>
+                    <input type="text" th:field="*{dataCadastro}" placeholder="2026-04-23" required>
+
+                    <label>Descrição</label>
+                    <textarea th:field="*{descricao}"></textarea>
+
+                    <label>Categoria</label>
+                    <select th:field="*{categoria}" required>
+                        <option value="">Selecione</option>
+                        <option value="Grãos de Café Especial sem terpenos">Grãos de Café Especial sem terpenos</option>
+                        <option value="Grãos de Café Especial com terpenos">Grãos de Café Especial com terpenos</option>
+                        <option value="Salgados">Salgados</option>
+                        <option value="Chocolate em barra">Chocolate em barra</option>
+                        <option value="Filtros e passadores de café">Filtros e passadores de café</option>
+                        <option value="Isqueiros/Maçaricos/Acendedores">Isqueiros/Maçaricos/Acendedores</option>
+                        <option value="Sedas">Sedas</option>
+                        <option value="Blunts">Blunts</option>
+                        <option value="Piteiras">Piteiras</option>
+                        <option value="Dichavador">Dichavador</option>
+                    </select>
+
+                    <button type="submit" class="btn">Salvar Produto</button>
+                    <a th:href="@{/produtos}" class="btn btn-secundario">Voltar</a>
+                </form>
+            </section>
+
+            <aside class="box-contato">
+                <h2>Cadastro web</h2>
+                <p>Esta página integra o front-end ao back-end Spring MVC.</p>
+                <p>Os dados são enviados ao controller e salvos no banco via JDBC.</p>
+            </aside>
+        </main>
+
+        <footer>
+            <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+        </footer>
+
+    </body>
+</html>
