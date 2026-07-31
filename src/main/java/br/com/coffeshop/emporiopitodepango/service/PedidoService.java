@@ -2,30 +2,39 @@ package br.com.coffeshop.emporiopitodepango.service;
 
 import br.com.coffeshop.emporiopitodepango.model.Pedido;
 import br.com.coffeshop.emporiopitodepango.repository.PedidoRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class PedidoService {
 
     private final PedidoRepository repository;
     private final CalculadoraPedidoService calculadoraPedidoService;
 
-    public PedidoService() {
-        this.repository = new PedidoRepository();
-        this.calculadoraPedidoService = new CalculadoraPedidoService();
-        
+    public PedidoService(PedidoRepository repository, CalculadoraPedidoService calculadoraPedidoService) {
+        this.repository = repository;
+        this.calculadoraPedidoService = calculadoraPedidoService;
     }
 
-    public void salvar(Pedido pedido) {
-        validar(pedido);
+    /**
+     * Cria um novo pedido. numeroPedido eh gerado pelo banco (AUTO_INCREMENT) -
+     * retorna o numero gerado para o chamador poder mostrar/usar.
+     */
+    public int salvar(Pedido pedido) {
+        validarCampos(pedido);
         pedido.setTotal(calculadoraPedidoService.calcularTotal(
                 pedido.getValorUnitario(),
                 pedido.getQuantidade()
         ));
-        repository.salvar(pedido);
+        return repository.salvar(pedido);
     }
 
     public void atualizar(Pedido pedido) {
-        validar(pedido);
+        validarCampos(pedido);
+        if (pedido.getNumeroPedido() <= 0) {
+            throw new IllegalArgumentException("Número do pedido inválido.");
+        }
         pedido.setTotal(calculadoraPedidoService.calcularTotal(
                 pedido.getValorUnitario(),
                 pedido.getQuantidade()
@@ -51,12 +60,9 @@ public class PedidoService {
         repository.excluir(numeroPedido);
     }
 
-    private void validar(Pedido pedido) {
+    private void validarCampos(Pedido pedido) {
         if (pedido == null) {
             throw new IllegalArgumentException("Pedido não pode ser nulo.");
-        }
-        if (pedido.getNumeroPedido() <= 0) {
-            throw new IllegalArgumentException("Número do pedido inválido.");
         }
         if (pedido.getIdCliente() <= 0) {
             throw new IllegalArgumentException("Cliente inválido.");
@@ -73,9 +79,5 @@ public class PedidoService {
         if (pedido.getQuantidade() <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero.");
         }
-    }
-
-    private double calcularTotal(Pedido pedido) {
-        return pedido.getValorUnitario() * pedido.getQuantidade();
     }
 }

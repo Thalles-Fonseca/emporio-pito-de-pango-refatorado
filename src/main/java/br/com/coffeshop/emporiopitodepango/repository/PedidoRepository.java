@@ -1,33 +1,46 @@
 
 package br.com.coffeshop.emporiopitodepango.repository;
 
-
-
 import br.com.coffeshop.emporiopitodepango.model.Pedido;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PedidoRepository {
 
-    public void salvar(Pedido pedido) {
-        String sql = "INSERT INTO pedido (numero_pedido, id_cliente, data_pedido, produto, valor_unitario, quantidade, total) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    /**
+     * numero_pedido é AUTO_INCREMENT no banco - não inserimos esse valor,
+     * deixamos o MySQL gerar e devolvemos o número gerado.
+     */
+    public int salvar(Pedido pedido) {
+        String sql = "INSERT INTO pedido (id_cliente, data_pedido, produto, valor_unitario, quantidade, total) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, pedido.getNumeroPedido());
-            stmt.setInt(2, pedido.getIdCliente());
-            stmt.setString(3, pedido.getDataPedido());
-            stmt.setString(4, pedido.getProduto());
-            stmt.setDouble(5, pedido.getValorUnitario());
-            stmt.setInt(6, pedido.getQuantidade());
-            stmt.setDouble(7, pedido.getTotal());
-
+            stmt.setInt(1, pedido.getIdCliente());
+            stmt.setString(2, pedido.getDataPedido());
+            stmt.setString(3, pedido.getProduto());
+            stmt.setDouble(4, pedido.getValorUnitario());
+            stmt.setInt(5, pedido.getQuantidade());
+            stmt.setDouble(6, pedido.getTotal());
             stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int numero = rs.getInt(1);
+                    pedido.setNumeroPedido(numero);
+                    return numero;
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar pedido: " + e.getMessage(), e);
         }
+
+        return -1;
     }
 
     public List<Pedido> listarTodos() {

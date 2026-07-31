@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo usuário - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Novo usuário</h1>
+
+    <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+    <form th:action="@{/admin/usuarios/salvar}" th:object="${usuario}" method="post">
+        <label>Nome de usuário</label>
+        <input type="text" th:field="*{nome}" required>
+
+        <label>Senha</label>
+        <input type="password" name="senha" required minlength="6">
+
+        <label>Perfil</label>
+        <select th:field="*{perfil}" required>
+            <option value="">Selecione</option>
+            <option value="GERENTE">Gerente</option>
+            <option value="FINANCEIRO">Financeiro</option>
+            <option value="ATENDENTE">Atendente</option>
+        </select>
+
+        <button type="submit" class="btn">Salvar</button>
+        <a th:href="@{/admin/usuarios}" class="btn btn-secundario">Voltar</a>
+    </form>
+</main>
+
+</body>
+</html>

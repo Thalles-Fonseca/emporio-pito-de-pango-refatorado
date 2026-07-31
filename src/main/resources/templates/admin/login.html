@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login administrativo - Empório Pito de Pango</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<main class="login-container">
+    <h1>Painel administrativo</h1>
+
+    <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+    <p class="mensagem-info" th:if="${mensagem}" th:text="${mensagem}"></p>
+
+    <form th:action="@{/admin/login}" method="post">
+        <label>Usuário</label>
+        <input type="text" name="username" required autofocus>
+
+        <label>Senha</label>
+        <input type="password" name="password" required>
+
+        <button type="submit" class="btn">Entrar</button>
+        <a th:href="@{/}" class="btn btn-secundario">Voltar à loja</a>
+    </form>
+</main>
+
+</body>
+</html>

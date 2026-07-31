@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header class="topo" th:fragment="topo">
+    <div class="logo-area">
+        <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+        <strong>Empório Pito de Pango</strong>
+    </div>
+
+    <nav>
+        <a th:href="@{/}">Início</a>
+        <a th:href="@{/produtos}">Produtos</a>
+        <a th:href="@{/produto}">Produto</a>
+        <a th:href="@{/carrinho}">Carrinho</a>
+        <a th:href="@{/sobre}">Sobre</a>
+        <a th:href="@{/contato}">Contato</a>
+        <a sec:authorize="hasAnyRole('GERENTE','FINANCEIRO','ATENDENTE')" th:href="@{/admin}">Painel Admin</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/admin/login}">Entrar</a>
+    </nav>
+
+    <a class="carrinho-link" th:href="@{/carrinho}">
+        🛒 <span id="contadorCarrinho" th:text="${totalItensCarrinho}">0</span>
+    </a>
+</header>
+</body>
+</html>

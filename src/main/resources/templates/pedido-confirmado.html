@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pedido confirmado - Empório Pito de Pango</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+
+        <header th:replace="~{fragments/topo-loja :: topo}"></header>
+
+        <main class="secao">
+            <h1>Pedido confirmado!</h1>
+            <p>Seu pedido foi registrado com sucesso e já entrou pra fila de preparo.</p>
+            <p>Número do pedido: <strong th:text="${numeroPedido}">0</strong></p>
+            <a th:href="@{/produtos}" class="btn">Continuar comprando</a>
+        </main>
+
+        <footer>
+            <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+    </body>
+</html>

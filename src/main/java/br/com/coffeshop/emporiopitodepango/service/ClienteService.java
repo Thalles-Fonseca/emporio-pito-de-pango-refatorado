@@ -1,28 +1,29 @@
 
 package br.com.coffeshop.emporiopitodepango.service;
 
-
-
 import br.com.coffeshop.emporiopitodepango.model.Cliente;
 import br.com.coffeshop.emporiopitodepango.repository.ClienteRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class ClienteService {
 
     private final ClienteRepository repository;
 
-    public ClienteService() {
-        this.repository = new ClienteRepository();
+    public ClienteService(ClienteRepository repository) {
+        this.repository = repository;
     }
 
-    public void salvar(Cliente cliente) {
+    public int salvar(Cliente cliente) {
         validar(cliente);
 
         if (repository.buscarPorCpf(cliente.getCpf()) != null) {
             throw new IllegalArgumentException("CPF já cadastrado.");
         }
 
-        repository.salvar(cliente);
+        return repository.salvar(cliente);
     }
 
     public void atualizar(Cliente cliente) {

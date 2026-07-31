@@ -8,47 +8,31 @@
     </head>
     <body>
 
-        <header class="topo">
-            <div class="logo-area">
-                <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
-                <strong>Empório Pito de Pango</strong>
-            </div>
-
-            <nav>
-                <a th:href="@{/}">Início</a>
-                <a th:href="@{/produtos}">Produtos</a>
-                <a th:href="@{/produto}">Produto</a>
-                <a th:href="@{/carrinho}">Carrinho</a>
-                <a th:href="@{/sobre}">Sobre</a>
-                <a th:href="@{/contato}">Contato</a>
-            </nav>
-
-            <a class="carrinho-link" th:href="@{/carrinho}">
-                🛒 <span id="contadorCarrinho">0</span>
-            </a>
-        </header>
+        <header th:replace="~{fragments/topo-loja :: topo}"></header>
 
         <main class="secao">
             <h1>Meu Carrinho</h1>
 
-            <div class="carrinho-container">
+            <p class="mensagem-info" th:if="${mensagem}" th:text="${mensagem}"></p>
+            <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+            <div class="carrinho-container" th:unless="${itens.isEmpty()}">
                 <section class="lista-carrinho">
-                    <div class="item-carrinho">
+                    <div class="item-carrinho" th:each="item : ${itens}">
                         <div class="img-carrinho">Img</div>
 
                         <div>
-                            <h3>Café Especial Premium</h3>
-                            <p>Grãos sem terpenos</p>
-                            <strong>R$ 39,90</strong>
+                            <h3 th:text="${item.nome}">Produto</h3>
+                            <strong th:text="'R$ ' + ${item.valorUnitario}">R$ 0,00</strong>
                         </div>
 
-                        <div class="quantidade-box">
-                            <button type="button" onclick="alterarQuantidadeCarrinho(-1)">-</button>
-                            <span id="quantidadeCarrinho">1</span>
-                            <button type="button" onclick="alterarQuantidadeCarrinho(1)">+</button>
-                        </div>
+                        <form th:action="@{/carrinho/alterar/{codigo}(codigo=${item.codigoProduto})}"
+                              method="post" class="quantidade-box">
+                            <input type="number" name="quantidade" th:value="${item.quantidade}" min="1" style="width:60px">
+                            <button type="submit" class="btn btn-secundario">Atualizar</button>
+                        </form>
 
-                        <button type="button" class="btn-remover" onclick="limparCarrinho()">Remover</button>
+                        <a class="btn-remover" th:href="@{/carrinho/remover/{codigo}(codigo=${item.codigoProduto})}">Remover</a>
                     </div>
 
                     <a th:href="@{/produtos}" class="btn btn-secundario">Continuar comprando</a>
@@ -56,12 +40,14 @@
 
                 <aside class="resumo-carrinho">
                     <h2>Resumo do pedido</h2>
-                    <p>Subtotal: <strong id="subtotalCarrinho">R$ 39,90</strong></p>
-                    <p>Entrega: <strong>Consultar</strong></p>
-                    <hr>
-                    <p>Total: <strong id="totalCarrinho">R$ 39,90</strong></p>
-                    <a th:href="@{/contato}" class="btn">Finalizar pedido</a>
+                    <p>Total: <strong th:text="'R$ ' + ${total}">R$ 0,00</strong></p>
+                    <a th:href="@{/carrinho/finalizar}" class="btn">Finalizar pedido</a>
                 </aside>
+            </div>
+
+            <div th:if="${itens.isEmpty()}">
+                <p>Seu carrinho está vazio.</p>
+                <a th:href="@{/produtos}" class="btn">Ver produtos</a>
             </div>
         </main>
 
@@ -71,6 +57,5 @@
             <p>© 2026 Todos os direitos reservados.</p>
         </footer>
 
-        <script th:src="@{/js/produtos.js}"></script>
     </body>
 </html>

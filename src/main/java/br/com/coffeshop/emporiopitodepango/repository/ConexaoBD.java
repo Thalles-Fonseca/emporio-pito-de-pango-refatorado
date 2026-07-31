@@ -1,37 +1,49 @@
 
 package br.com.coffeshop.emporiopitodepango.repository;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
+/**
+ * Antes, esta classe lia um arquivo "/application.properties" manualmente
+ * procurando as chaves db.url/db.user/db.password - só que essas chaves
+ * nunca existiram nesse arquivo (estavam em database.properties, que nunca
+ * era carregado). Resultado: url/usuario/senha ficavam sempre nulos.
+ *
+ * Agora a classe é um @Component gerenciado pelo Spring, que injeta os
+ * valores de spring.datasource.* já resolvendo ${DATABASE_URL} etc a partir
+ * de variáveis de ambiente (produção) ou dos valores padrão definidos em
+ * application.properties (desenvolvimento local). Guardamos os valores em
+ * campos estáticos no @PostConstruct para que os repositories continuem
+ * chamando ConexaoBD.getConnection() sem precisar de injeção de dependência
+ * em cada um deles.
+ */
+@Component
 public class ConexaoBD {
 
-    private static final String ARQUIVO_CONFIG = "/application.properties";
+    @Value("${spring.datasource.url}")
+    private String urlValue;
+
+    @Value("${spring.datasource.username}")
+    private String usuarioValue;
+
+    @Value("${spring.datasource.password}")
+    private String senhaValue;
+
     private static String url;
     private static String usuario;
     private static String senha;
 
-    static {
-        try (InputStream input = ConexaoBD.class.getResourceAsStream(ARQUIVO_CONFIG)) {
-            if (input == null) {
-                throw new RuntimeException("Arquivo database.properties não encontrado.");
-            }
-
-            Properties props = new Properties();
-            props.load(input);
-
-            url = props.getProperty("db.url");
-            usuario = props.getProperty("db.user");
-            senha = props.getProperty("db.password");
-
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar as configurações do banco: " + e.getMessage(), e);
-        }
+    @PostConstruct
+    public void init() {
+        url = urlValue;
+        usuario = usuarioValue;
+        senha = senhaValue;
     }
 
     public static Connection getConnection() {

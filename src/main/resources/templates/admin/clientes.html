@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Clientes</h1>
+
+    <div class="acoes-pagina">
+        <a class="btn" th:href="@{/admin/clientes/novo}">Novo Cliente</a>
+    </div>
+
+    <form th:action="@{/admin/clientes}" method="get" class="form-busca">
+        <input type="text" name="termo" th:value="${termo}" placeholder="Buscar por nome ou CPF">
+        <button type="submit" class="btn btn-secundario">Buscar</button>
+        <a th:if="${termo}" th:href="@{/admin/clientes}" class="btn btn-secundario">Limpar</a>
+    </form>
+
+    <table class="tabela-admin">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${clientes}">
+            <td th:text="${c.nome}"></td>
+            <td th:text="${c.cpf}"></td>
+            <td th:text="${c.telefone}"></td>
+            <td th:text="${c.email}"></td>
+            <td th:text="${c.endereco}"></td>
+            <td class="acoes-tabela">
+                <a th:href="@{/admin/clientes/editar/{cpf}(cpf=${c.cpf})}">Editar</a>
+                <a class="excluir"
+                   th:href="@{/admin/clientes/excluir/{cpf}(cpf=${c.cpf})}"
+                   onclick="return confirm('Deseja excluir este cliente?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

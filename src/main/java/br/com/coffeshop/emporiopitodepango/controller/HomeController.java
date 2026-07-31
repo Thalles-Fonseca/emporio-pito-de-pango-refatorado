@@ -23,11 +23,6 @@ public class HomeController {
         return "produto";
     }
 
-    @GetMapping("/carrinho")
-    public String carrinho() {
-        return "carrinho";
-    }
-
     @GetMapping("/sobre")
     public String sobre() {
         return "sobre";
