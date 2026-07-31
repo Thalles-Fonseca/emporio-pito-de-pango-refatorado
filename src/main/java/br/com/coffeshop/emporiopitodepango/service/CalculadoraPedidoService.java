@@ -1,7 +1,9 @@
 
 package br.com.coffeshop.emporiopitodepango.service;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class CalculadoraPedidoService {
 
     public double calcularTotal(double valorUnitario, int quantidade) {

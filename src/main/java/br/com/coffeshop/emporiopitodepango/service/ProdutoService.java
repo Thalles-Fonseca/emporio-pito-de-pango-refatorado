@@ -47,6 +47,13 @@ public class ProdutoService {
         return repository.listarTodos();
     }
 
+    public Produto buscarPorCodigo(int codigo) {
+        if (codigo <= 0) {
+            throw new IllegalArgumentException("Código inválido.");
+        }
+        return repository.buscarPorCodigo(codigo);
+    }
+
     public List<Produto> buscarPorNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome para busca é obrigatório.");

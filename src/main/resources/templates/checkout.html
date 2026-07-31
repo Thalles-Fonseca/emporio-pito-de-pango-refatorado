@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Finalizar pedido - Empório Pito de Pango</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+
+        <header th:replace="~{fragments/topo-loja :: topo}"></header>
+
+        <main class="secao">
+            <h1>Finalizar pedido</h1>
+
+            <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+            <p>Total do pedido: <strong th:text="'R$ ' + ${total}">R$ 0,00</strong></p>
+
+            <form th:action="@{/carrinho/finalizar}" th:object="${cliente}" method="post">
+                <label>Nome completo</label>
+                <input type="text" th:field="*{nome}" required>
+
+                <label>CPF</label>
+                <input type="text" th:field="*{cpf}" required>
+
+                <label>Telefone</label>
+                <input type="text" th:field="*{telefone}" required>
+
+                <label>E-mail</label>
+                <input type="email" th:field="*{email}">
+
+                <label>Endereço de entrega</label>
+                <input type="text" th:field="*{endereco}" required>
+
+                <button type="submit" class="btn">Confirmar pedido</button>
+                <a th:href="@{/carrinho}" class="btn btn-secundario">Voltar ao carrinho</a>
+            </form>
+        </main>
+
+        <footer>
+            <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+            <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
+            <p>© 2026 Todos os direitos reservados.</p>
+        </footer>
+
+    </body>
+</html>

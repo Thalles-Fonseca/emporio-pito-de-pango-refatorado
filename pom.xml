@@ -45,6 +45,18 @@
             <version>9.3.0</version>
         </dependency>
 
+        <!-- Autenticacao e autorizacao do painel administrativo -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Permite usar sec:authorize / sec:authentication nos templates Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+
         <!-- Testes -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,6 +67,7 @@
     </dependencies>
 
     <build>
+        <finalName>app</finalName>
         <plugins>
             <!-- Plugin do Spring Boot -->
             <plugin>

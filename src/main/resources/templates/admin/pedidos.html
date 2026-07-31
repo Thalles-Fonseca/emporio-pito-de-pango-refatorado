@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Histórico de Pedidos</h1>
+
+    <table class="tabela-admin">
+        <thead>
+        <tr>
+            <th>Nº</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Produto</th>
+            <th>Qtd.</th>
+            <th>Total</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${pedidos}">
+            <td th:text="${p.numeroPedido}"></td>
+            <td th:text="${p.nomeCliente}"></td>
+            <td th:text="${p.dataPedido}"></td>
+            <td th:text="${p.produto}"></td>
+            <td th:text="${p.quantidade}"></td>
+            <td th:text="'R$ ' + ${p.total}"></td>
+            <td class="acoes-tabela">
+                <a th:href="@{/admin/pedidos/{numero}(numero=${p.numeroPedido})}">Detalhes</a>
+                <a class="excluir" sec:authorize="hasAnyRole('GERENTE','FINANCEIRO')"
+                   th:href="@{/admin/pedidos/excluir/{numero}(numero=${p.numeroPedido})}"
+                   onclick="return confirm('Deseja excluir este pedido?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

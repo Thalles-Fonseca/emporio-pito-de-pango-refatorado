@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Usuários do painel</h1>
+
+    <div class="acoes-pagina">
+        <a class="btn" th:href="@{/admin/usuarios/novo}">Novo Usuário</a>
+    </div>
+
+    <table class="tabela-admin">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Perfil</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${usuarios}">
+            <td th:text="${u.nome}"></td>
+            <td th:text="${u.perfil}"></td>
+            <td class="acoes-tabela">
+                <a class="excluir"
+                   th:href="@{/admin/usuarios/excluir/{nome}(nome=${u.nome})}"
+                   onclick="return confirm('Deseja excluir este usuário?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

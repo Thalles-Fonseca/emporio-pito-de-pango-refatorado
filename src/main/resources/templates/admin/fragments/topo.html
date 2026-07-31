@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header class="admin-topo" th:fragment="topo">
+    <div class="logo-area">
+        <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
+        <strong>Painel administrativo</strong>
+    </div>
+
+    <nav>
+        <a th:href="@{/admin}">Início</a>
+        <a th:href="@{/produtos}">Produtos</a>
+        <a th:href="@{/admin/fornecedores}">Fornecedores</a>
+        <a th:href="@{/admin/clientes}">Clientes</a>
+        <a th:href="@{/admin/pedidos}">Pedidos</a>
+        <a sec:authorize="hasAnyRole('GERENTE','FINANCEIRO')" th:href="@{/admin/caixa}">Caixa</a>
+        <a sec:authorize="hasRole('GERENTE')" th:href="@{/admin/usuarios}">Usuários</a>
+    </nav>
+
+    <div class="admin-usuario">
+        <span sec:authentication="name">usuário</span>
+        <form th:action="@{/admin/logout}" method="post">
+            <button type="submit">Sair</button>
+        </form>
+    </div>
+</header>
+</body>
+</html>

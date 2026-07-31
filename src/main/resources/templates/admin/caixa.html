@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Caixa - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Movimentações de Caixa</h1>
+
+    <div class="acoes-pagina">
+        <a class="btn" th:href="@{/admin/caixa/novo}">Abrir Novo Registro</a>
+    </div>
+
+    <table class="tabela-admin">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Operador</th>
+            <th>Saldo inicial</th>
+            <th>Saldo atual</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${registros}">
+            <td th:text="${c.data}"></td>
+            <td th:text="${c.operador}"></td>
+            <td th:text="'R$ ' + ${c.saldoInicial}"></td>
+            <td th:text="'R$ ' + ${c.saldoAtual}"></td>
+            <td th:text="${c.descricao}"></td>
+            <td class="acoes-tabela">
+                <a class="excluir"
+                   th:href="@{/admin/caixa/excluir/{id}(id=${c.idCaixa})}"
+                   onclick="return confirm('Deseja excluir este registro?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

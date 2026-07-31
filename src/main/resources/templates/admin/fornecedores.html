@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fornecedores - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Fornecedores</h1>
+
+    <div class="acoes-pagina">
+        <a class="btn" th:href="@{/admin/fornecedores/novo}">Novo Fornecedor</a>
+    </div>
+
+    <table class="tabela-admin">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="f : ${fornecedores}">
+            <td th:text="${f.nome}"></td>
+            <td th:text="${f.cnpj}"></td>
+            <td th:text="${f.telefone}"></td>
+            <td th:text="${f.email}"></td>
+            <td class="acoes-tabela">
+                <a th:href="@{/admin/fornecedores/editar/{cnpj}(cnpj=${f.cnpj})}">Editar</a>
+                <a class="excluir"
+                   th:href="@{/admin/fornecedores/excluir/{cnpj}(cnpj=${f.cnpj})}"
+                   onclick="return confirm('Deseja excluir este fornecedor?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

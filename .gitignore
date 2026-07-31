@@ -1,4 +1,7 @@
 /target/
 /nbproject/private/
-/src/main/resources/database.properties
 *.class
+.env
+.idea/
+*.iml
+target/

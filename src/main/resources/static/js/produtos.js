@@ -1,20 +1,9 @@
-let contador = Number(localStorage.getItem("contadorCarrinho")) || 0;
-
-const contadorElemento = document.getElementById("contadorCarrinho");
-
-if (contadorElemento) {
-    contadorElemento.textContent = contador;
-}
-
+// O contador do carrinho no cabeçalho agora vem do servidor (carrinho de
+// sessão real), não é mais controlado por localStorage. A função abaixo
+// segue existindo só pra página de vitrine estática (/produto), que ainda
+// não foi ligada ao carrinho de verdade.
 function adicionarCarrinho() {
-    contador++;
-    localStorage.setItem("contadorCarrinho", contador);
-
-    if (contadorElemento) {
-        contadorElemento.textContent = contador;
-    }
-
-    alert("Produto adicionado ao carrinho!");
+    alert("Esta página de produto ainda é uma vitrine estática - use o catálogo em /produtos para comprar de verdade.");
 }
 
 const produtos = [

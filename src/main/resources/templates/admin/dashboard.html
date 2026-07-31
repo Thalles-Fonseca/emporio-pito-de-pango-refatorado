@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel administrativo - Empório Pito de Pango</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Bem-vindo(a) ao painel</h1>
+    <p>Escolha uma área para gerenciar:</p>
+
+    <div class="admin-cards-resumo">
+        <a class="admin-card" th:href="@{/produtos}">
+            <h3>Produtos</h3>
+            <p>Cadastro e estoque do catálogo</p>
+        </a>
+
+        <a class="admin-card" th:href="@{/admin/fornecedores}">
+            <h3>Fornecedores</h3>
+            <p>Cadastro de fornecedores</p>
+        </a>
+
+        <a class="admin-card" th:href="@{/admin/clientes}">
+            <h3>Clientes</h3>
+            <p>Cadastro e busca de clientes</p>
+        </a>
+
+        <a class="admin-card" th:href="@{/admin/pedidos}">
+            <h3>Pedidos</h3>
+            <p>Histórico de pedidos da loja</p>
+        </a>
+
+        <a class="admin-card" th:href="@{/admin/caixa}" sec:authorize="hasAnyRole('GERENTE','FINANCEIRO')">
+            <h3>Caixa</h3>
+            <p>Abertura e histórico de caixa</p>
+        </a>
+
+        <a class="admin-card" th:href="@{/admin/usuarios}" sec:authorize="hasRole('GERENTE')">
+            <h3>Usuários</h3>
+            <p>Gerenciar acesso ao painel</p>
+        </a>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fornecedor - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1 th:text="${modoEdicao} ? 'Editar Fornecedor' : 'Novo Fornecedor'">Fornecedor</h1>
+
+    <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+    <form th:action="@{/admin/fornecedores/salvar}" th:object="${fornecedor}" method="post">
+        <input type="hidden" name="modoEdicao" th:value="${modoEdicao}">
+
+        <label>Nome</label>
+        <input type="text" th:field="*{nome}" required>
+
+        <label>CNPJ</label>
+        <input type="text" th:field="*{cnpj}" th:readonly="${modoEdicao}" required>
+
+        <label>Telefone</label>
+        <input type="text" th:field="*{telefone}">
+
+        <label>E-mail</label>
+        <input type="email" th:field="*{email}">
+
+        <button type="submit" class="btn">Salvar</button>
+        <a th:href="@{/admin/fornecedores}" class="btn btn-secundario">Voltar</a>
+    </form>
+</main>
+
+</body>
+</html>

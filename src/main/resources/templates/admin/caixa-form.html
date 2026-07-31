@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo registro de Caixa - Painel administrativo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+
+<header th:replace="~{admin/fragments/topo :: topo}"></header>
+
+<main class="admin-container">
+    <h1>Abrir registro de Caixa</h1>
+
+    <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>
+
+    <form th:action="@{/admin/caixa/salvar}" th:object="${caixa}" method="post">
+        <label>Data</label>
+        <input type="text" th:field="*{data}" placeholder="2026-07-16" required>
+
+        <label>Operador</label>
+        <input type="text" th:field="*{operador}" required>
+
+        <label>Saldo inicial</label>
+        <input type="number" step="0.01" th:field="*{saldoInicial}" required>
+
+        <label>Saldo atual</label>
+        <input type="number" step="0.01" th:field="*{saldoAtual}" required>
+
+        <label>Descrição</label>
+        <textarea th:field="*{descricao}"></textarea>
+
+        <button type="submit" class="btn">Salvar</button>
+        <a th:href="@{/admin/caixa}" class="btn btn-secundario">Voltar</a>
+    </form>
+</main>
+
+</body>
+</html>
