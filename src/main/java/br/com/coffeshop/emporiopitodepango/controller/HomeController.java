@@ -18,10 +18,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/produto")
-    public String produto() {
-        return "produto";
-    }
+
 
     @GetMapping("/sobre")
     public String sobre() {
