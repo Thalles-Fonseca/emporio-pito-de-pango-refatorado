@@ -11,7 +11,10 @@
         <header th:replace="~{fragments/topo-loja :: topo}"></header>
 
         <main class="secao">
-            <h1>Catálogo de Produtos</h1>
+            <h1 th:text="${categoriaAtual != null and !categoriaAtual.isEmpty()} ? 'Catálogo — ' + ${categoriaAtual} : 'Catálogo de Produtos'">Catálogo de Produtos</h1>
+
+            <a th:if="${categoriaAtual != null and !categoriaAtual.isEmpty()}"
+               th:href="@{/produtos}" class="btn btn-secundario">Ver todos os produtos</a>
 
             <p class="mensagem-info" th:if="${mensagem}" th:text="${mensagem}"></p>
             <p class="mensagem-erro" th:if="${erro}" th:text="${erro}"></p>

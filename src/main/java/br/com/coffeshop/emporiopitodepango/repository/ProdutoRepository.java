@@ -1,6 +1,4 @@
-
 package br.com.coffeshop.emporiopitodepango.repository;
-
 
 import br.com.coffeshop.emporiopitodepango.model.Produto;
 import java.sql.*;
@@ -14,8 +12,7 @@ public class ProdutoRepository {
     public void salvar(Produto p) {
         String sql = "INSERT INTO produto (codigo, nome, fornecedor, quantidade, valor, data_cadastro, descricao, categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, p.getCodigo());
             stmt.setString(2, p.getNome());
@@ -35,8 +32,7 @@ public class ProdutoRepository {
     public void atualizar(Produto p) {
         String sql = "UPDATE produto SET nome=?, fornecedor=?, quantidade=?, valor=?, data_cadastro=?, descricao=?, categoria=? WHERE codigo=?";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getFornecedor());
@@ -56,8 +52,7 @@ public class ProdutoRepository {
     public void excluir(int codigo) {
         String sql = "DELETE FROM produto WHERE codigo=?";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, codigo);
             stmt.executeUpdate();
@@ -70,20 +65,18 @@ public class ProdutoRepository {
         List<Produto> lista = new ArrayList<>();
         String sql = "SELECT * FROM produto";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Produto p = new Produto(
-                    rs.getInt("codigo"),
-                    rs.getString("nome"),
-                    rs.getString("fornecedor"),
-                    rs.getInt("quantidade"),
-                    rs.getString("data_cadastro"),
-                    rs.getString("descricao"),
-                    rs.getDouble("valor"),
-                    rs.getString("categoria")
+                        rs.getInt("codigo"),
+                        rs.getString("nome"),
+                        rs.getString("fornecedor"),
+                        rs.getInt("quantidade"),
+                        rs.getString("data_cadastro"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"),
+                        rs.getString("categoria")
                 );
                 lista.add(p);
             }
@@ -96,22 +89,21 @@ public class ProdutoRepository {
     public Produto buscarPorCodigo(int codigo) {
         String sql = "SELECT * FROM produto WHERE codigo = ?";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, codigo);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return new Produto(
-                    rs.getInt("codigo"),
-                    rs.getString("nome"),
-                    rs.getString("fornecedor"),
-                    rs.getInt("quantidade"),
-                    rs.getString("data_cadastro"),
-                    rs.getString("descricao"),
-                    rs.getDouble("valor"),
-                    rs.getString("categoria")
+                        rs.getInt("codigo"),
+                        rs.getString("nome"),
+                        rs.getString("fornecedor"),
+                        rs.getInt("quantidade"),
+                        rs.getString("data_cadastro"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"),
+                        rs.getString("categoria")
                 );
             }
         } catch (SQLException e) {
@@ -125,22 +117,21 @@ public class ProdutoRepository {
         List<Produto> lista = new ArrayList<>();
         String sql = "SELECT * FROM produto WHERE nome LIKE ?";
 
-        try (Connection conn = ConexaoBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, "%" + nome + "%");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Produto p = new Produto(
-                    rs.getInt("codigo"),
-                    rs.getString("nome"),
-                    rs.getString("fornecedor"),
-                    rs.getInt("quantidade"),
-                    rs.getString("data_cadastro"),
-                    rs.getString("descricao"),
-                    rs.getDouble("valor"),
-                    rs.getString("categoria")
+                        rs.getInt("codigo"),
+                        rs.getString("nome"),
+                        rs.getString("fornecedor"),
+                        rs.getInt("quantidade"),
+                        rs.getString("data_cadastro"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"),
+                        rs.getString("categoria")
                 );
                 lista.add(p);
             }
@@ -150,4 +141,34 @@ public class ProdutoRepository {
 
         return lista;
     }
+
+    public List<Produto> buscarPorCategoria(String categoria) {
+        List<Produto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM produto WHERE categoria = ?";
+
+        try ( Connection conn = ConexaoBD.getConnection();  PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoria);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto(
+                        rs.getInt("codigo"),
+                        rs.getString("nome"),
+                        rs.getString("fornecedor"),
+                        rs.getInt("quantidade"),
+                        rs.getString("data_cadastro"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"),
+                        rs.getString("categoria")
+                );
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar produtos por categoria: " + e.getMessage(), e);
+        }
+
+        return lista;
+    }
+
 }

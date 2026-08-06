@@ -61,6 +61,13 @@ public class ProdutoService {
 
         return repository.buscarPorNome(nome);
     }
+    
+    public List<Produto> buscarPorCategoria(String categoria) {
+    if (categoria == null || categoria.trim().isEmpty()) {
+        return listarTodos();
+    }
+    return repository.buscarPorCategoria(categoria);
+}
 
     private void validarProduto(Produto produto) {
         if (produto == null) {

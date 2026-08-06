@@ -12,11 +12,12 @@ public class ProdutoController {
 
     private final ProdutoService produtoService = new ProdutoService();
 
-    @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("produtos", produtoService.listarTodos());
-        return "produtos";
-    }
+   @GetMapping
+public String listar(@RequestParam(required = false) String categoria, Model model) {
+    model.addAttribute("produtos", produtoService.buscarPorCategoria(categoria));
+    model.addAttribute("categoriaAtual", categoria);
+    return "produtos";
+}
 
     @GetMapping("/novo")
     public String novo(Model model) {
