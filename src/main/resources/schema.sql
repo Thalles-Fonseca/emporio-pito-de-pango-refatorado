@@ -74,18 +74,12 @@ CREATE TABLE IF NOT EXISTS produto (
 
 -- ----------------------------------------------------------------------------
 -- pedido
--- "produto" guarda o NOME do produto em texto livre (mesma observacao acima).
--- id_cliente aceita NULL porque o PedidoControle do desktop faz um
--- "SELECT id_cliente FROM cliente WHERE nome = ?" que pode nao encontrar
--- ninguem; preferimos permitir NULL a quebrar o INSERT.
+-- 
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS pedido (
     numero_pedido  INT AUTO_INCREMENT,
     id_cliente     INT NULL,
     data_pedido    VARCHAR(20),
-    produto        VARCHAR(150),
-    valor_unitario DECIMAL(10,2) NOT NULL DEFAULT 0.00,
-    quantidade     INT NOT NULL DEFAULT 1,
     total          DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     PRIMARY KEY (numero_pedido),
     CONSTRAINT fk_pedido_cliente FOREIGN KEY (id_cliente)
@@ -93,6 +87,23 @@ CREATE TABLE IF NOT EXISTS pedido (
         ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ----------------------------------------------------------------------------
+-- pedido_item
+-- 
+-- ----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS pedido_item (
+    id_item        INT AUTO_INCREMENT,
+    numero_pedido  INT NOT NULL,
+    produto        VARCHAR(150) NOT NULL,
+    valor_unitario DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    quantidade     INT NOT NULL DEFAULT 1,
+    subtotal       DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    PRIMARY KEY (id_item),
+    CONSTRAINT fk_item_pedido FOREIGN KEY (numero_pedido)
+        REFERENCES pedido (numero_pedido)
+        ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- ----------------------------------------------------------------------------
 -- caixa
 -- ----------------------------------------------------------------------------
