@@ -12,12 +12,13 @@ public class Produto {
     private String descricao;
     private double valor;
     private String categoria;
+    private String imagemUrl;
 
     public Produto() {
     }
 
     public Produto(int codigo, String nome, String fornecedor, int quantidade,
-                   String dataCadastro, String descricao, double valor, String categoria) {
+                   String dataCadastro, String descricao, double valor, String categoria,String imagemUrl) {
         this.codigo = codigo;
         this.nome = nome;
         this.fornecedor = fornecedor;
@@ -26,6 +27,7 @@ public class Produto {
         this.descricao = descricao;
         this.valor = valor;
         this.categoria = categoria;
+        this.imagemUrl = imagemUrl;
     }
 
     public int getCodigo() {
@@ -90,6 +92,14 @@ public class Produto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+    
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
     
     private boolean ativo;

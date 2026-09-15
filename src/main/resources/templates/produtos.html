@@ -25,7 +25,10 @@
 
             <div class="produtos-grid">
                 <div class="card-produto" th:each="produto : ${produtos}">
-                    <div class="img-placeholder">Imagem</div>
+                    <div class="imagem-produto">
+                         <img th:src="@{'/img/' + ${produto.imagemUrl}}" th:alt="${produto.nome}">
+                             
+                    </div>
 
                     <h3 th:text="${produto.nome}">Nome do Produto</h3>
                     <p th:text="${produto.categoria}">Categoria</p>

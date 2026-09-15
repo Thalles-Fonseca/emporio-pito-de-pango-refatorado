@@ -19,7 +19,9 @@
             <div class="carrinho-container" th:unless="${itens.isEmpty()}">
                 <section class="lista-carrinho">
                     <div class="item-carrinho" th:each="item : ${itens}">
-                        <div class="img-carrinho">Img</div>
+                        <img th:src="@{'/img/' + ${item.imagemUrl}}" 
+                             th:alt="${item.nome}" 
+                             class="img-carrinho">
 
                         <div>
                             <h3 th:text="${item.nome}">Produto</h3>

@@ -20,57 +20,63 @@
             <img th:src="@{/img/LogoPitodePango.png}" alt="Logo destaque">
         </section>
 
-<div class="layout-loja">
-    <aside class="sidebar-categorias">
-        <h2>Categorias</h2>
-        <nav>
-            <ul>
-                <li><a th:href="@{/produtos(categoria='Grãos de Café Especial sem terpenos')}">Grãos sem terpenos</a></li>
-                <li><a th:href="@{/produtos(categoria='Grãos de Café Especial com terpenos')}">Grãos com terpenos</a></li>
-                <li><a th:href="@{/produtos(categoria='Salgados')}">Salgados</a></li>
-                <li><a th:href="@{/produtos(categoria='Chocolate em barra')}">Chocolate em barra</a></li>
-                <li><a th:href="@{/produtos(categoria='Filtros e passadores de café')}">Filtros e passadores</a></li>
-                <li><a th:href="@{/produtos(categoria='Isqueiros/Maçaricos/Acendedores')}">Isqueiros e maçaricos</a></li>
-                <li><a th:href="@{/produtos(categoria='Sedas')}">Sedas</a></li>
-                <li><a th:href="@{/produtos(categoria='Blunts')}">Blunts</a></li>
-                <li><a th:href="@{/produtos(categoria='Piteiras')}">Piteiras</a></li>
-                <li><a th:href="@{/produtos(categoria='Dichavador')}">Dichavador</a></li>
-            </ul>
-        </nav>
-    </aside>
+        <div class="layout-loja">
+            <aside class="sidebar-categorias">
+                <h2>Categorias</h2>
+                <nav>
+                    <ul>
+                        <li><a th:href="@{/produtos(categoria='Grãos de Café Especial sem terpenos')}">Grãos sem terpenos</a></li>
+                        <li><a th:href="@{/produtos(categoria='Grãos de Café Especial com terpenos')}">Grãos com terpenos</a></li>
+                        <li><a th:href="@{/produtos(categoria='Salgados')}">Salgados</a></li>
+                        <li><a th:href="@{/produtos(categoria='Chocolate em barra')}">Chocolate em barra</a></li>
+                        <li><a th:href="@{/produtos(categoria='Filtros e passadores de café')}">Filtros e passadores</a></li>
+                        <li><a th:href="@{/produtos(categoria='Isqueiros/Maçaricos/Acendedores')}">Isqueiros e maçaricos</a></li>
+                        <li><a th:href="@{/produtos(categoria='Sedas')}">Sedas</a></li>
+                        <li><a th:href="@{/produtos(categoria='Blunts')}">Blunts</a></li>
+                        <li><a th:href="@{/produtos(categoria='Piteiras')}">Piteiras</a></li>
+                        <li><a th:href="@{/produtos(categoria='Dichavador')}">Dichavador</a></li>
+                    </ul>
+                </nav>
+            </aside>
 
-    <main class="conteudo-loja">
-        <section>
-            <h2>Produtos em destaque</h2>
+            <main class="conteudo-loja">
+                <section>
+                    <h2>Produtos em destaque</h2>
 
-            <div class="produtos-grid">
-                <div class="card-produto">
-                    <div class="img-placeholder">Imagem</div>
-                    <h3>Café Especial</h3>
-                    <p>Grãos sem terpenos</p>
-                    <strong>R$ 39,90</strong>
-                    <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
-                </div>
+                    <div class="produtos-grid">
+                        <div class="card-produto">
+                            <div class="imagem-produto">
+                                <img th:src="@{/img/cafe-especial.png}" alt="Café Especial">
+                            </div>
+                            <h3>Café Especial</h3>
+                            <p>Grãos sem terpenos</p>
+                            <strong>R$ 39,90</strong>
+                            <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
+                        </div>
 
-                <div class="card-produto">
-                    <div class="img-placeholder">Imagem</div>
-                    <h3>Café com Terpenos</h3>
-                    <p>Grãos com terpenos</p>
-                    <strong>R$ 49,90</strong>
-                    <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
-                </div>
+                        <div class="card-produto">
+                            <div class="imagem-produto">
+                                <img th:src="@{/img/cafe-terpenado.png}" alt="Café com Terpenos">
+                            </div>
+                            <h3>Café com Terpenos</h3>
+                            <p>Grãos com terpenos</p>
+                            <strong>R$ 49,90</strong>
+                            <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
+                        </div>
 
-                <div class="card-produto">
-                    <div class="img-placeholder">Imagem</div>
-                    <h3>Chocolate Artesanal</h3>
-                    <p>Chocolate em barra</p>
-                    <strong>R$ 19,90</strong>
-                    <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
-                </div>
-            </div>
-        </section>
-    </main>
-</div>
+                        <div class="card-produto">
+                            <div class="imagem-produto">
+                                <img th:src="@{/img/chocolate-artesanal.png}" alt="Chocolate Artesanal">
+                            </div>
+                            <h3>Chocolate Artesanal</h3>
+                            <p>Chocolate em barra</p>
+                            <strong>R$ 19,90</strong>
+                            <button type="button" onclick="adicionarCarrinho()">Adicionar</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
 
         <footer>
             <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">

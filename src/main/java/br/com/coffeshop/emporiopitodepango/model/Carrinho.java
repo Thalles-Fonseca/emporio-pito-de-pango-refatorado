@@ -36,7 +36,11 @@ public class Carrinho {
             existente.setQuantidade(novaQuantidade);
         } else {
             itens.put(produto.getCodigo(), new ItemCarrinho(
-                produto.getCodigo(), produto.getNome(), produto.getValor(), quantidade
+                produto.getCodigo(),
+                    produto.getNome(),
+                    produto.getValor(),
+                    quantidade,
+                    produto.getImagemUrl()
             ));
         }
     }

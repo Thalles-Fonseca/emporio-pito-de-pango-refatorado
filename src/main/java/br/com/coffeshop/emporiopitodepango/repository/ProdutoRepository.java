@@ -76,7 +76,8 @@ public class ProdutoRepository {
                         rs.getString("data_cadastro"),
                         rs.getString("descricao"),
                         rs.getDouble("valor"),
-                        rs.getString("categoria")
+                        rs.getString("categoria"),
+                        rs.getString("imagemUrl")
                 );
                 lista.add(p);
             }
@@ -103,7 +104,8 @@ public class ProdutoRepository {
                         rs.getString("data_cadastro"),
                         rs.getString("descricao"),
                         rs.getDouble("valor"),
-                        rs.getString("categoria")
+                        rs.getString("categoria"),
+                        rs.getString("imagemUrl")
                 );
             }
         } catch (SQLException e) {
@@ -131,7 +133,8 @@ public class ProdutoRepository {
                         rs.getString("data_cadastro"),
                         rs.getString("descricao"),
                         rs.getDouble("valor"),
-                        rs.getString("categoria")
+                        rs.getString("categoria"),
+                        rs.getString("imagemUrl")
                 );
                 lista.add(p);
             }
@@ -160,7 +163,8 @@ public class ProdutoRepository {
                         rs.getString("data_cadastro"),
                         rs.getString("descricao"),
                         rs.getDouble("valor"),
-                        rs.getString("categoria")
+                        rs.getString("categoria"),
+                        rs.getString("imagemUrl")
                 );
                 lista.add(p);
             }
