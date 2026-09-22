@@ -65,9 +65,11 @@
         </main>
 
         <footer>
+            <div th:replace="~{fragments/rodape-loja :: rodape}"></div>
+
             <img th:src="@{/img/LogoPitodePango.png}" alt="Logo">
             <p>Empório Pito de Pango — Seu café, sua vibe, seu ritual.</p>
         </footer>
-<div th:replace="~{fragments/rodape-loja :: rodape}"></div>
+        <div th:replace="~{fragments/whatsapp :: whatsapp-button}"></div>
     </body>
 </html>
