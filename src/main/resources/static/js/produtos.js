@@ -1,66 +1,47 @@
 // O contador do carrinho no cabeçalho agora vem do servidor (carrinho de
-// sessão real), não é mais controlado por localStorage. A função abaixo
-// segue existindo só pra página de vitrine estática (/produto), que ainda
-// não foi ligada ao carrinho de verdade.
+// sessão real), não é mais controlado por localStorage.
 function adicionarCarrinho() {
     alert("Esta página de produto ainda é uma vitrine estática - use o catálogo em /produtos para comprar de verdade.");
 }
 
-const produtos = [
-    { nome: "Café Especial", categoria: "cafe-sem", texto: "Grãos sem terpenos", preco: "R$ 39,90" },
-    { nome: "Café com Terpenos", categoria: "cafe-com", texto: "Grãos com terpenos", preco: "R$ 49,90" },
-    { nome: "Salgado Artesanal", categoria: "salgados", texto: "Salgados", preco: "R$ 12,00" },
-    { nome: "Chocolate em Barra", categoria: "chocolate", texto: "Chocolate em barra", preco: "R$ 19,90" },
-    { nome: "Filtro de Café", categoria: "filtros", texto: "Filtros e passadores", preco: "R$ 15,00" },
-    { nome: "Maçarico", categoria: "isqueiros", texto: "Isqueiros/Maçaricos", preco: "R$ 35,00" },
-    { nome: "Sedas Premium", categoria: "sedas", texto: "Sedas", preco: "R$ 8,00" },
-    { nome: "Blunts", categoria: "blunts", texto: "Blunts", preco: "R$ 10,00" },
-    { nome: "Piteiras", categoria: "piteiras", texto: "Piteiras", preco: "R$ 7,00" },
-    { nome: "Dichavador", categoria: "dichavador", texto: "Dichavador", preco: "R$ 29,90" }
-];
-
-const listaProdutos = document.getElementById("listaProdutos");
+// Elementos de busca e filtro
 const buscaProduto = document.getElementById("buscaProduto");
+const btnBuscar = document.getElementById("btnBuscar");
 const filtroCategoria = document.getElementById("filtroCategoria");
+const listaProdutos = document.getElementById("listaProdutos");
 
-function renderizarProdutos(lista) {
-    if (!listaProdutos) return;
+// 1. Lógica de busca dinâmica por texto (filtra os cards renderizados pelo Thymeleaf na tela)
+function executarBusca() {
+    if (!buscaProduto) return;
+    
+    const termo = buscaProduto.value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".card-produto");
 
-    listaProdutos.innerHTML = "";
+    cards.forEach(card => {
+        const nomeElemento = card.querySelector("h3");
+        if (!nomeElemento) return;
 
-    lista.forEach(produto => {
-        listaProdutos.innerHTML += `
-            <div class="card-produto">
-                <div class="img-placeholder">Imagem</div>
-                <h3>${produto.nome}</h3>
-                <p>${produto.texto}</p>
-                <strong>${produto.preco}</strong>
-                <button onclick="adicionarCarrinho()">Adicionar</button>
-            </div>
-        `;
+        const nomeProduto = nomeElemento.textContent.toLowerCase();
+        
+        // Mostra ou esconde o card em tempo real conforme o texto digitado
+        if (nomeProduto.includes(termo)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
     });
 }
 
-function filtrarProdutos() {
-    const termo = buscaProduto.value.toLowerCase();
-    const categoria = filtroCategoria.value;
-
-    const filtrados = produtos.filter(produto => {
-        const correspondeBusca = produto.nome.toLowerCase().includes(termo);
-        const correspondeCategoria = categoria === "todos" || produto.categoria === categoria;
-
-        return correspondeBusca && correspondeCategoria;
-    });
-
-    renderizarProdutos(filtrados);
+// Eventos da barra de pesquisa e botão de lupa
+if (buscaProduto) {
+    buscaProduto.addEventListener("input", executarBusca);
 }
 
-if (listaProdutos) {
-    renderizarProdutos(produtos);
-
-    buscaProduto.addEventListener("input", filtrarProdutos);
-    filtroCategoria.addEventListener("change", filtrarProdutos);
+if (btnBuscar) {
+    btnBuscar.addEventListener("click", executarBusca);
 }
+
+// 2. Funções de controle de quantidade (mantidas para as páginas que as utilizam)
 let quantidadeProduto = 1;
 let quantidadeCarrinho = 1;
 const precoBaseCarrinho = 39.90;

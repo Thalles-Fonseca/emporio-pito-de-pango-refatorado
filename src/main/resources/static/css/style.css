@@ -633,3 +633,61 @@ footer img {
     transform: scale(1.1);
     box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.4);
 }
+/* Container geral da busca */
+.container-busca {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Estrutura que segura o input e o botão juntos */
+.barra-pesquisa {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Estilo da caixa de texto */
+.input-busca {
+    width: 100%;
+    padding: 10px 45px 10px 15px; /* Espaço à direita para o botão da lupa */
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Bordas arredondadas elegantes */
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-busca:focus {
+    border-color: #25d366;
+    box-shadow: 0 0 5px rgba(37, 211, 102, 0.3);
+}
+
+/* Estilo do botão com a lupa */
+.btn-lupa {
+    position: absolute;
+    right: 5px;
+    background: #25d366; /* Cor temática da marca / whatsapp */
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-lupa:hover {
+    background: #20ba5a;
+    transform: scale(1.05);
+}
+
+.btn-lupa svg {
+    stroke: #fff;
+}
